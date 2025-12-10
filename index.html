@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Expedientes — GitHub Pages + Google Drive</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+</head>
+<body>
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1 class="h4 mb-0">Sistema de Expedientes (GH Pages + Google Drive)</h1>
+    <div>
+      <button id="btnSign" class="btn btn-outline-primary">Conectar con Google</button>
+      <button id="btnSignOut" class="btn btn-outline-secondary d-none">Cerrar sesión</button>
+    </div>
+  </div>
+
+  <div id="userInfo" class="mb-3 text-muted">No conectado.</div>
+
+  <div class="mb-3 d-flex gap-2">
+    <input id="search" class="form-control" placeholder="Buscar por código, nombre o asunto...">
+    <button id="btnAdd" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm" disabled>Añadir expediente</button>
+    <button id="btnExport" class="btn btn-outline-success" disabled>Exportar JSON</button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-sm table-bordered align-middle">
+      <thead class="table-light">
+        <tr><th>Código</th><th>Cliente</th><th>Asunto</th><th>Fecha</th><th>Archivos</th><th>Acciones</th></tr>
+      </thead>
+      <tbody id="tableBody">
+        <tr><td colspan="6" class="text-center">Conéctate con Google para ver expedientes.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <small class="text-muted">
+    Archivos se suben a tu Google Drive en una carpeta por expediente. Metadatos (id, folderId, etc.) se guardan en una Google Sheet.
+  </small>
+</div>
+
+<!-- Modal Form -->
+<div class="modal fade" id="modalForm" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <form id="formExpediente" class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Añadir expediente</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <input type="hidden" id="expId">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label">Código</label>
+            <input id="codigo" class="form-control" required>
+          </div>
+          <div class="col-md-8">
+            <label class="form-label">Nombre / Cliente</label>
+            <input id="nombre" class="form-control" required>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Asunto</label>
+            <input id="asunto" class="form-control">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Fecha</label>
+            <input id="fecha" type="date" class="form-control" required>
+          </div>
+          <div class="col-md-8">
+            <label class="form-label">Notas</label>
+            <input id="notas" class="form-control">
+          </div>
+          <div class="col-12">
+            <label class="form-label">Adjuntar archivos</label>
+            <input id="adjuntos" type="file" class="form-control" multiple>
+            <div id="adjList" class="mt-2"></div>
+            <small class="text-muted">Evita archivos grandes. Cada archivo se sube a Drive y se enlaza en la fila de Sheet.</small>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="submit">Guardar expediente</button>
+        <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
