@@ -1,14 +1,25 @@
-// AUTH.JS
-let userEmail = null;
+let userProfile = null;
+let token = null;
 
-function handleCredentialResponse(response) {
-    const data = jwt_decode(response.credential);
-    userEmail = data.email;
+function onSignIn(response) {
+    token = response.credential;
 
-    document.getElementById("loginScreen").classList.add("hidden");
-    document.getElementById("appScreen").classList.remove("hidden");
+    // Decodificar JWT del usuario
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    userProfile = payload;
 
-    initDB();
+    document.getElementById("login-section").style.display = "none";
+    document.getElementById("app").style.display = "block";
+
+    gapi.load("client", initGoogleDrive);
 }
 
+function logout() {
+    google.accounts.id.disableAutoSelect();
+    userProfile = null;
+    token = null;
+
+    document.getElementById("login-section").style.display = "block";
+    document.getElementById("app").style.display = "none";
+}
 
