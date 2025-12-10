@@ -1,69 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Gestión de Expedientes Legales</title>
-<link rel="stylesheet" href="styles.css">
-<meta name="google-signin-client_id" content="TU_CLIENT_ID_AQUI">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Expedientes Legales</title>
 
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-<script src="auth.js" defer></script>
-<script src="drive.js" defer></script>
-<script src="app.js" defer></script>
+    <!-- Estilos -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- Google API -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
-
 <body>
 
-<div id="loginScreen">
-    <h2>Iniciar sesión</h2>
+    <h1>Sistema de Gestión de Expedientes Legales</h1>
 
-    <div id="g_id_onload"
-         data-client_id="813716685470-a4t8hcof0uipjal7kv66nam68pab4de5.apps.googleusercontent.com"
-         data-callback="handleCredentialResponse">
+    <div id="login-section">
+        <h3>Iniciar sesión con Google</h3>
+        <div id="g_id_onload"
+             data-client_id="TU_CLIENT_ID.apps.googleusercontent.com"
+             data-auto_prompt="false"
+             data-callback="onSignIn">
+        </div>
+
+        <div class="g_id_signin"
+             data-type="standard"
+             data-shape="rectangular"
+             data-theme="outline"
+             data-text="signin_with"
+             data-size="large">
+        </div>
     </div>
 
-    <div class="g_id_signin"
-         data-type="standard"
-         data-size="large"
-         data-theme="outline">
-    </div>
-</div>
-
-<div id="appScreen" class="hidden">
-
-    <h1>Sistema Gestión de Expedientes</h1>
-
-    <button onclick="showSection('clientes')">Clientes</button>
-    <button onclick="showSection('expedientes')">Expedientes</button>
-    <button onclick="showSection('documentos')">Documentos</button>
-    <button onclick="exportBackupDrive()">Backup a Drive</button>
-    <button onclick="importarBackupDrive()">Restaurar desde Drive</button>
-
-    <hr>
-
-    <!-- CLIENTES -->
-    <section id="clientes" class="section hidden">
-        <h2>Clientes</h2>
-        <input type="text" placeholder="Buscar..." onkeyup="buscarClientes(this.value)">
-        <button onclick="agregarCliente()">Agregar Cliente</button>
-        <div id="listaClientes"></div>
-    </section>
-
-    <!-- EXPEDIENTES -->
-    <section id="expedientes" class="section hidden">
+    <div id="app" style="display:none;">
         <h2>Expedientes</h2>
-        <button onclick="agregarExpediente()">Agregar Expediente</button>
-        <div id="listaExpedientes"></div>
-    </section>
 
-    <!-- DOCUMENTOS -->
-    <section id="documentos" class="section hidden">
-        <h2>Documentos</h2>
-        <button onclick="agregarDocumento()">Agregar Documento</button>
-        <div id="listaDocumentos"></div>
-    </section>
+        <button onclick="logout()">Cerrar sesión</button>
+        <button onclick="crearCarpeta()">Crear carpeta</button>
+        <button onclick="subirArchivo()">Subir archivo</button>
 
-</div>
+        <h3>Lista de archivos</h3>
+        <ul id="lista"></ul>
+    </div>
+
+    <!-- Scripts del proyecto -->
+    <script src="auth.js"></script>
+    <script src="drive.js"></script>
+    <script src="app.js"></script>
 
 </body>
 </html>
