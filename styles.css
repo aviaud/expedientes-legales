@@ -1,0 +1,44 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    background: #f5f5f5;
+}
+
+.sidebar {
+    width: 220px;
+    background: #222;
+    color: white;
+    height: 100vh;
+    position: fixed;
+    padding: 20px;
+}
+
+.sidebar button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px;
+    background: #444;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.sidebar button:hover {
+    background: #666;
+}
+
+.main {
+    margin-left: 240px;
+    padding: 20px;
+}
+
+.section { display: block; }
+.hidden { display: none; }
+
+.card {
+    background: white;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}

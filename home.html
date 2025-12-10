@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Gestión de Expedientes Legales</title>
+<link rel="stylesheet" href="styles.css">
+<script src="auth.js"></script>
+</head>
+<body onload="checkSession(); initDB();">
+
+<div class="sidebar">
+    <h2>Menú</h2>
+    <button onclick="showSection('clientes')">Clientes</button>
+    <button onclick="showSection('expedientes')">Expedientes</button>
+    <button onclick="showSection('documentos')">Documentos</button>
+    <button onclick="showSection('backup')">Backup</button>
+    <button onclick="logout()">Cerrar Sesión</button>
+</div>
+
+<div class="main">
+
+    <!-- CLIENTES -->
+    <section id="clientes" class="section">
+        <h2>Clientes</h2>
+        <input type="text" placeholder="Buscar cliente..." onkeyup="buscarClientes(this.value)">
+        <button onclick="agregarCliente()">Agregar Cliente</button>
+        <div id="listaClientes"></div>
+    </section>
+
+    <!-- EXPEDIENTES -->
+    <section id="expedientes" class="section hidden">
+        <h2>Expedientes</h2>
+        <button onclick="agregarExpediente()">Crear Expediente</button>
+        <div id="listaExpedientes"></div>
+    </section>
+
+    <!-- DOCUMENTOS -->
+    <section id="documentos" class="section hidden">
+        <h2>Documentos</h2>
+        <button onclick="agregarDocumento()">Nuevo Documento</button>
+        <div id="listaDocumentos"></div>
+    </section>
+
+    <!-- BACKUP -->
+    <section id="backup" class="section hidden">
+        <h2>Backup / Restore</h2>
+        <button onclick="exportarBackup()">Exportar Backup</button>
+        <input type="file" onchange="importarBackup(event)">
+    </section>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
